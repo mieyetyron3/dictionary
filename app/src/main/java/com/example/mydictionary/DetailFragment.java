@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -137,6 +139,8 @@ public class DetailFragment extends Fragment {
             public void onClick(View view) {
                 //TODO Delete the item
                 sharedViewModel.deleteWord(word);
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.action_detailFragment_to_listFragment);
             }
         });
     }

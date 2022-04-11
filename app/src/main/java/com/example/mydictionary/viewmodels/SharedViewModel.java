@@ -97,6 +97,19 @@ public class SharedViewModel extends AndroidViewModel {
     }
 
     public void deleteWord(String word) {
+
+        List<WordFullModel> wordFullModelTemp = null;
         deleteWordMutableLiveData.postValue(word);
+        for(List<WordFullModel> wordFullModelList : wordFullModelRecyclerList) {
+            if(wordFullModelList.get(0).getWord().equals(word)) {
+                //Delete from
+                wordFullModelTemp = wordFullModelList;
+                break;
+            }
+        }
+        if(wordFullModelTemp != null) {
+            wordFullModelRecyclerList.remove(wordFullModelTemp);
+        }
+
     }
 }
