@@ -105,7 +105,7 @@ public class ListFragment extends Fragment {
 
         //Initialize resources
         listRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        wordFullModelRecyclerList = new ArrayList<>();
+        wordFullModelRecyclerList = sharedViewModel.getWordFullModelRecyclerList();
         wordAdapter = new WordAdapter(wordFullModelRecyclerList, getContext());
         listRecyclerview.setAdapter(wordAdapter);
 

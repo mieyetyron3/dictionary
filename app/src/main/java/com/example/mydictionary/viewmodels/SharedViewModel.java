@@ -23,6 +23,7 @@ public class SharedViewModel extends AndroidViewModel {
     private boolean clicked;
     private MutableLiveData<String> deleteWordMutableLiveData;
     private List<WordFullModel> sharedWordList;
+    private List<List<WordFullModel>> wordFullModelRecyclerList;
 
     public SharedViewModel(@NonNull Application application) {
         super(application);
@@ -32,6 +33,15 @@ public class SharedViewModel extends AndroidViewModel {
         this.clicked = false;
         this.deleteWordMutableLiveData = new MutableLiveData<>();
         this.sharedWordList = new ArrayList<>();
+        this.wordFullModelRecyclerList = new ArrayList<>();
+    }
+
+    public List<List<WordFullModel>> getWordFullModelRecyclerList() {
+        return wordFullModelRecyclerList;
+    }
+
+    public void setWordFullModelRecyclerList(List<List<WordFullModel>> wordFullModelRecyclerList) {
+        this.wordFullModelRecyclerList = wordFullModelRecyclerList;
     }
 
     public boolean isClicked() {
