@@ -49,7 +49,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
                 //TODO: Navigate to DetailFragment
                 Bundle bundle = new Bundle();
                 List<WordFullModel> wordList = wordFullModelRecyclerList.get(holder.getAdapterPosition());
-                bundle.putSerializable("wordDetails", (Serializable) wordList);
+                bundle.putSerializable("wordDetails", (Serializable) wordList.get(holder.getAdapterPosition()));
                 navController = Navigation.findNavController(view);
                 navController.navigate(R.id.action_listFragment_to_detailFragment, bundle);
             }

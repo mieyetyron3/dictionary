@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydictionary.R;
 import com.example.mydictionary.models.MeaningModel;
+import com.example.mydictionary.models.WordFullModel;
 
 import java.util.List;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
-    private List<MeaningModel> meaningModelList;
+    private List<String> wordList;
     private Context context;
 
-    public DetailAdapter(List<MeaningModel> meaningModelList, Context context) {
-        this.meaningModelList = meaningModelList;
+    public DetailAdapter(List<String> wordList, Context context) {
+        this.wordList = wordList;
         this.context = context;
     }
 
@@ -34,12 +35,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //holder.itemWordDefinition.setText(meaningModelList.get(position).);
+        holder.itemWordDefinition.setText(wordList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return wordList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

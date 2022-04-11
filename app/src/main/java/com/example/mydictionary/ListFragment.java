@@ -25,6 +25,7 @@ import com.example.mydictionary.adapters.WordAdapter;
 import com.example.mydictionary.models.WordFullModel;
 import com.example.mydictionary.viewmodels.SharedViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,8 +143,11 @@ public class ListFragment extends Fragment {
                         wordFullModelRecyclerList.add(wordFullModels);
                         wordAdapter.notifyDataSetChanged();
                         //TODO: Navigate to DetaulFragment
+                        //Set the values
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("wordDetails", wordFullModels.get(0));
                         NavController navController = NavHostFragment.findNavController(ListFragment.this);
-                        navController.navigate(R.id.action_listFragment_to_detailFragment);
+                        navController.navigate(R.id.action_listFragment_to_detailFragment, bundle);
                     }
                     else {
                         //TODO:

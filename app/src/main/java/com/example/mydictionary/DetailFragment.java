@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mydictionary.adapters.DetailAdapter;
+import com.example.mydictionary.models.DefinitionModel;
 import com.example.mydictionary.models.MeaningModel;
 import com.example.mydictionary.models.WordFullModel;
 import com.example.mydictionary.viewmodels.SharedViewModel;
@@ -44,8 +45,9 @@ public class DetailFragment extends Fragment {
     private RecyclerView detailRecyclerView;
     private Button detailDeleteButton;
     private SharedViewModel sharedViewModel;
-    private List<MeaningModel> meaningModelList;
+    private WordFullModel wordFullModel;
     private DetailAdapter detailAdapter;
+    private List<String> definitionAndPartOfSpeech;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -97,20 +99,36 @@ public class DetailFragment extends Fragment {
 
         //Initialize resources
         detailRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        meaningModelList = new ArrayList<>();
-        detailAdapter = new DetailAdapter(meaningModelList, getContext());
+        //wordFullModel = new WordFullModel();
+        definitionAndPartOfSpeech = new ArrayList<>();
+        detailAdapter = new DetailAdapter(definitionAndPartOfSpeech, getContext());
         detailRecyclerView.setAdapter(detailAdapter);
 
-       /* Bundle bundle = getArguments();
-        List<WordFullModel> wordFullModelList = (List<WordFullModel>) bundle.getSerializable("wordDetails");
-        String word = wordFullModelList.get(0).getWord();
-        setDetailValues(wordFullModelList.get(0).getMeanings());
+
+       Bundle bundle = getArguments();
+       WordFullModel wordFullModel = (WordFullModel) bundle.get("wordDetails");
+        String word = wordFullModel.getWord();
+        detailWord.setText(word);
+
+        setDetailValues(wordFullModel);
         //Set listener for delete button
-        setDetailDeleteButtonListener(word); */
+        setDetailDeleteButtonListener(word);
+
+        detailAdapter.notifyDataSetChanged();
     }
 
-    private void setDetailValues(List<MeaningModel> meaningModelList) {
+    private void setDetailValues(WordFullModel wordFullModel) {
+        String partOfSpeech = "";
+        String definition = "";
 
+        //Set the values
+        for(MeaningModel meaningModel : wordFullModel.getMeanings()) {
+            partOfSpeech = meaningModel.getPartOfSpeech();
+            for(DefinitionModel definitionModel : meaningModel.getDefinitions()) {
+                definition = definitionModel.getDefinition();
+                definitionAndPartOfSpeech.add(definition + " - " + partOfSpeech);
+            }
+        }
     }
 
     private void setDetailDeleteButtonListener(String word) {
