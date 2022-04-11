@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydictionary.R;
+import com.example.mydictionary.models.MeaningModel;
 import com.example.mydictionary.models.WordFullModel;
 
 import java.io.Serializable;
@@ -39,9 +40,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String word = wordFullModelRecyclerList.get(position).get(0).getWord();
+        List<MeaningModel> meanings = wordFullModelRecyclerList.get(position).get(0).getMeanings();
         holder.getItemWord().setText(word);
         //TODO: handle background based on the null value
-
+        if(meanings == null) {
+            holder.getItemWord().setBackgroundColor(context.getColor(R.color.purple_200));
+        }
         //Set OnclickListener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
